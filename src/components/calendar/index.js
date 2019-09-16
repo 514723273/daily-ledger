@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Calendar, Badge } from 'antd';
 import { EventsWrapper } from './style';
+import { MinuteToHour } from '../../utils/time';
 
 
 export default class Test extends React.PureComponent {
@@ -64,7 +65,7 @@ export default class Test extends React.PureComponent {
                 {
                     dateEvents.filter(item => (item.detail != null && item.detail.trim().length !== 0 && item.value >= 60)).map(item =>   // 只有有详情的并且时长大于 60min 才显示
                         <li key={item.lineTime}>
-                            <Badge color={item.color} text={item.detail} />
+                            <Badge color={item.color} text={`${MinuteToHour(item.value)}h ${item.detail}`} />
                         </li>
                     )
                 }
