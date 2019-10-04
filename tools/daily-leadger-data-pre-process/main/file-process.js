@@ -41,6 +41,10 @@ function record(today, todayEvents, DATA_FILE_PATH) {
         } else {
             monthData = JSON.parse(content);
         }
+        if(monthData[today.date - 1] != null) {    // 防止日期未改动覆盖数据！
+            console.log('Please check that the date is correct?');
+            return;
+        }
         // 添加新的一天，再整体覆盖写回
         monthData[today.date - 1] = todayEvents;
         fs.writeFile(path.join(__dirname, fileName), JSON.stringify(monthData), err => {

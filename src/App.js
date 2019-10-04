@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import Calendar from './components/calendar';
+import MonthOverview from './pages/month-overview';
 
 export default function() {
     return (
         <Fragment>
-            <Calendar />
+            <MonthOverview />
         </Fragment>
     )
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { Calendar, Badge } from 'antd';
 import { EventsWrapper } from './style';
 import { MinuteToHour } from '../../utils/time';
@@ -8,21 +7,10 @@ import { MinuteToHour } from '../../utils/time';
 export default class Test extends React.PureComponent {
     constructor(props) {
         super(props);
-        const date = new Date();
-        this.state = {
-            selectedYear: date.getFullYear(),
-            selectedMonth: date.getMonth(),
-            monthEvents: [],
-        };
-        this.getMonthEvents = this.getMonthEvents.bind(this);
         this.onPanelChange = this.onPanelChange.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.dateCellRender = this.dateCellRender.bind(this);
         this.monthCellRender = this.monthCellRender.bind(this);
-    }
-
-    componentDidMount() {
-        this.getMonthEvents();
     }
 
     render() {
@@ -36,36 +24,51 @@ export default class Test extends React.PureComponent {
         );
     }
 
-    getMonthEvents() {
-        axios.get(`/data/${this.state.selectedYear}/${this.state.selectedMonth + 1}.json`).then(res => {
-            this.setState({monthEvents: res.data});
-        }).catch(err => {
-            this.setState({monthEvents: []});
-        });
+    dateEventsFilter(item, selectedType, minValue) {
+        let result = true;
+        if(selectedType == null) {
+            result = result && item.detail != null && item.detail.trim().length !== 0;      // 默认选择：事件详情不为空
+        } else {
+            // result = result && item.color.startsWith(selectedType);
+        }
+        if(minValue == null) {
+            result = result && item.value >= 60;         // 默认选择：事件时长 >= 60 min
+        } else {
+            result = result && item.value >= minValue;
+        }
+        return result;
     }
-  
+
+    // Calendar
     onSelect = () => {
         // 扩展
     };
-  
+
+    // Calendar
     onPanelChange(date) {
-        this.setState({selectedYear: date.year(), selectedMonth: date.month()}, this.getMonthEvents);
+        this.props.selectYearAndMouth(date.year(), date.month());
     };
 
+    // Calendar
     dateCellRender(date) {
-        if(date.year() !== this.state.selectedYear || date.month() !== this.state.selectedMonth) {      // 本年本月的才显示
+        const DEFAULT_COLOR = "#f9f9f9";
+
+        if(date.year() !== this.props.selectedYear || date.month() !== this.props.selectedMonth) {      // 本年本月的才显示
             return null;
         }
-        const dateEvents = this.state.monthEvents[date.date() - 1];     // 当天的所有事件
+        const dateEvents = this.props.monthEvents[date.date() - 1];     // 当天的所有事件
         if(dateEvents == null) {
             return null;
         }
         return (
             <EventsWrapper className="events">
                 {
-                    dateEvents.filter(item => (item.detail != null && item.detail.trim().length !== 0 && item.value >= 60)).map(item =>   // 只有有详情的并且时长大于 60min 才显示
+                    dateEvents
+                    .filter(item => (this.dateEventsFilter(item, null, 30)))
+                    .sort((a, b) => (a.value - b.value))
+                    .map(item =>   
                         <li key={item.lineTime}>
-                            <Badge color={item.color} text={`${MinuteToHour(item.value)}h ${item.detail}`} />
+                            <Badge color={this.props.typeColor[item.type] || DEFAULT_COLOR} text={`${MinuteToHour(item.value)}h ${item.type} ${item.detail != null ? item.detail : ""}`} />
                         </li>
                     )
                 }
@@ -73,7 +76,9 @@ export default class Test extends React.PureComponent {
         )
     }
 
+    // Calendar
     monthCellRender(date) {
         // 扩展
     }
+
   }

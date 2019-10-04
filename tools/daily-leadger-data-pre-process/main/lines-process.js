@@ -1,5 +1,3 @@
-const TypeColor = require('../constants/type-color');
-
 /**
  * 获取今日的年份、月份、日期
  */
@@ -47,8 +45,7 @@ function getEvent(aLine, startTime) {
         lineTime,
         type: strs[1],
         detail: strs[2],
-        value: lineTime - startTime,        
-        color: TypeColor[strs[1]] ? TypeColor[strs[1]] : '#f9f9f9',
+        value: lineTime - startTime
     }
 }
 
@@ -62,8 +59,11 @@ const linesProcess = lines => {
     const today = getToday(lines[0]);       // 第一行：明确日期，或者默认空行即今日
 
     // 处理所有事件
-    startTime = 0;
+    let startTime = 0;
     for(let i = 1; i < lines.length; i ++) {
+        if(lines[i] === '\n') {
+            continue;
+        }
         const event = getEvent(lines[i], startTime);
         result.push(event);
 

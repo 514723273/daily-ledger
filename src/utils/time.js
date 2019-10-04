@@ -1,5 +1,8 @@
 export const MinuteToHour = minute => {
-    return Number.prototype.toFixed.call(minute / 60, 2);
+    if(minute == null) {
+        return 0;
+    }
+    return Number.prototype.toFixed.call(minute / 60, 1);
 }
 
 
