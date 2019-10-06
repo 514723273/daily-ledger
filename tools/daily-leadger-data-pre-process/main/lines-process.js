@@ -32,11 +32,15 @@ const getLineTime = str => {
  * 分析一整行，将事件的各个要素解析出来。
  */
 function getEvent(aLine, startTime) {
+
     const ELE_SEPARATOR = ' ';
 
     const strs = aLine.split(ELE_SEPARATOR);
 
     let lineTime = getLineTime(strs[0]);
+    if(isNaN(lineTime)) {      // 过滤空行（空行 或者 true 都会使 lineTime 为 null
+        return null;
+    }
     if(lineTime < startTime) {  // 下午时间重新轮回
         lineTime += 12 * 60;
     }
@@ -65,12 +69,16 @@ const linesProcess = lines => {
             continue;
         }
         const event = getEvent(lines[i], startTime);
-        result.push(event);
-
-        startTime = event.lineTime;
+        if(event != null) {
+            result.push(event);
+            startTime = event.lineTime;
+        }
     }
-
-    return [today, result];
+    let isForce = false;
+    if(lines[lines.length - 1] === 'force') {   // 强制覆盖模式
+        isForce = true;
+    }
+    return [isForce, today, result];
 }
 
 

@@ -26,7 +26,7 @@ function readToday(TODAY_FILE_PATH, DATA_FILE_PATH) {
     });
 }
 
-function record(today, todayEvents, DATA_FILE_PATH) {
+function record(isForce, today, todayEvents, DATA_FILE_PATH) {
     const fileName = `../${DATA_FILE_PATH}/${today.year}/${today.month}.json`;
     const monthReadLine = getReadLine(fileName);
     // 先读取原文件的内容（当月）
@@ -41,7 +41,7 @@ function record(today, todayEvents, DATA_FILE_PATH) {
         } else {
             monthData = JSON.parse(content);
         }
-        if(monthData[today.date - 1] != null) {    // 防止日期未改动覆盖数据！
+        if(!isForce && monthData[today.date - 1] != null) {    // 非强制覆盖模式下，防止日期未改动覆盖数据！
             console.log('Please check that the date is correct?');
             return;
         }
