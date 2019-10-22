@@ -1,21 +1,32 @@
-import typeCode from '../constants/type-code';
-
 let TYPE_COLOR = null;
+let TYPE_CODE = {};
+
+let LARGE_TYPE_PREFIX = "*";
 
 const getLargeTypeName = (eventType) => {
     const color = TYPE_COLOR[eventType];
     const largTypeCode = `${color[2]}${color[4]}${color[6]}`;
-    return typeCode[largTypeCode];
+    return TYPE_CODE[largTypeCode];
+}
+
+const generateTypeCode = () => {
+    for(let key of Object.keys(TYPE_COLOR)) {
+        if(key.startsWith(LARGE_TYPE_PREFIX)) {
+            const color = TYPE_COLOR[key];
+            const code = `${color[2]}${color[4]}${color[6]}`;
+            TYPE_CODE[code] = key.substring(1);
+        }
+    }
 }
 
 const initSeries = () => {
     const series = [];
-    for(let value of Object.values(typeCode)) {
+    for(let value of Object.values(TYPE_CODE)) {
         series.push({
             name: value,
             type: 'bar',
             itemStyle: {
-                color: TYPE_COLOR[value],
+                color: TYPE_COLOR[`${LARGE_TYPE_PREFIX}${value}`],
             },
             data: new Array(31).fill(0),
         })
@@ -59,6 +70,8 @@ const classify = (series, index, event) => {
  const seriesHandle = (monthEvents, typeColor) => {
     TYPE_COLOR = typeColor;
 
+    generateTypeCode();
+
     const series = initSeries();
     
     for(let i = 0; i < monthEvents.length; i ++) {  // i 代表 天
@@ -85,7 +98,7 @@ const classify = (series, index, event) => {
 //     if(event == null || event.value == null || TYPE_COLOR[event.type] == null) {
 //         return;
 //     }
-//     const largeType = typeCode[getLargeType(event.type)];
+//     const largeType = TYPE_CODE[getLargeType(event.type)];
 
 //     if(result[result.length - 1][largeType] == null) {
 //         result[result.length - 1][largeType] = 0;
