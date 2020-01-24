@@ -1,16 +1,16 @@
-import * as constants from '../store/constants';
+import TimeLedgerActionType from '../store/action-types';
 import moment from 'moment';
-
-/************** constants ********************/
-export type SELECT_YEAR_MONTH_TYPE = typeof constants.SELECT_YEAR_MONTH;
 
 /************** actions ********************/
 export interface Action {
-  type: SELECT_YEAR_MONTH_TYPE;
+  type: TimeLedgerActionType;
 }
 
 export interface SelectYearMonthAction extends Action {
-  type: SELECT_YEAR_MONTH_TYPE;
+  readonly selectedDate: moment.Moment;
+}
+
+export interface GetEventListAction extends Action {
   readonly selectedDate: moment.Moment;
 }
 
@@ -24,6 +24,12 @@ export interface TimeLedgerStoreState {
 export interface SelectYearMonth {
   (date: moment.Moment): void;
 }
+
+export interface GetEventList {
+  (date: moment.Moment): void;
+}
+
 export interface TimeLedgerStoreDispatch {
   selectYearMonth: SelectYearMonth;
+  getEventList: GetEventList;
 }

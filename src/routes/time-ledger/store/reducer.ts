@@ -1,5 +1,5 @@
 import moment from 'moment';
-import * as constants from './constants';
+import TimeLedgerActionType from './action-types';
 import { TimeLedgerStoreState, Action, SelectYearMonthAction } from '../types/store';
 
 const today: moment.Moment = moment();
@@ -13,7 +13,7 @@ export default (
   action: Action
 ): TimeLedgerStoreState => {
   switch (action.type) {
-    case constants.SELECT_YEAR_MONTH:
+    case TimeLedgerActionType.SELECT_YEAR_MONTH:
       return {
         ...state,
         selectedDate: (action as SelectYearMonthAction).selectedDate
