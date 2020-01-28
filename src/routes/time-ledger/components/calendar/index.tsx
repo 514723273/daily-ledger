@@ -1,19 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 import { TableWrapper, TableHeadWrapper, TableBodyWrapper } from './style';
+import DateTD from '../date-td';
+import { WEEK_NAME_LIST, CALENDAR_COL, CALENDAR_ROW } from '../../constants';
 import { CalendarProps } from '../../types/props';
-
-const weekNameList: ReadonlyArray<string> = [
-  '周一',
-  '周二',
-  '周三',
-  '周四',
-  '周五',
-  '周六',
-  '周日'
-];
-const CALENDAR_COL = weekNameList.length;
-const CALENDAR_ROW = 6;
 
 function getDisplayWeeks(selectedDate: moment.Moment): moment.Moment[][] {
   const firstDayOfMonth: moment.Moment = selectedDate.startOf('month'); //  每月1号
@@ -33,14 +23,14 @@ function getDisplayWeeks(selectedDate: moment.Moment): moment.Moment[][] {
 }
 
 export default function(props: CalendarProps) {
-  const { selectedDate } = props;
+  const { selectedDate, monthEventList } = props;
 
   const weeks = getDisplayWeeks(selectedDate);
   return (
     <TableWrapper>
       <TableHeadWrapper>
         <tr>
-          {weekNameList.map((day: string) => (
+          {WEEK_NAME_LIST.map((day: string) => (
             <th key={day}>{day}</th>
           ))}
         </tr>
@@ -49,15 +39,12 @@ export default function(props: CalendarProps) {
         {weeks.map((aWeek: moment.Moment[], index: number) => (
           <tr key={index}>
             {aWeek.map((aDay: moment.Moment) => (
-              <td key={aDay.dayOfYear()}>
-                <div
-                  className={`${
-                    aDay.month() === selectedDate.month() ? 'date-header this-month' : 'date-header'
-                  }`}
-                >
-                  {aDay.date() === 1 ? `${aDay.month() + 1}月${aDay.date()}日` : aDay.date()}
-                </div>
-              </td>
+              <DateTD
+                key={aDay.dayOfYear()}
+                aDay={aDay}
+                selectedDate={selectedDate}
+                dateEventList={monthEventList[aDay.date() - 1]}
+              />
             ))}
           </tr>
         ))}

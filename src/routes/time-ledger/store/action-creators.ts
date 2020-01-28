@@ -1,6 +1,12 @@
 import TimeLedgerActionType from './action-types';
-import { SelectYearMonthAction, GetEventListAction } from '../types/store';
+import {
+  SelectYearMonthAction,
+  GetMonthEventListAction,
+  SetMonthEventListAction,
+  AssembleMonthEventListAction
+} from '../types/store';
 import moment from 'moment';
+import DailyEvent from '../types/daily-event';
 
 export function getSelectYearMonthAction(date: moment.Moment): SelectYearMonthAction {
   return {
@@ -9,9 +15,27 @@ export function getSelectYearMonthAction(date: moment.Moment): SelectYearMonthAc
   };
 }
 
-export function getGetEventList(date: moment.Moment): GetEventListAction {
+export function getGetMonthEventListAction(date: moment.Moment): GetMonthEventListAction {
   return {
-    type: TimeLedgerActionType.GET_EVENTS_LIST,
+    type: TimeLedgerActionType.GET_MONTH_EVENT_LIST,
     selectedDate: date
+  };
+}
+
+export function getSetMonthEventListAction(
+  monthEventList: ReadonlyArray<ReadonlyArray<DailyEvent>>
+): SetMonthEventListAction {
+  return {
+    type: TimeLedgerActionType.SET_MONTH_EVENT_LIST,
+    monthEventList
+  };
+}
+
+export function getAssembleMonthEventListAction(
+  monthEventList: ReadonlyArray<ReadonlyArray<DailyEvent>>
+): AssembleMonthEventListAction {
+  return {
+    type: TimeLedgerActionType.ASSEMBLE_MONTH_EVENT_LIST,
+    monthEventList
   };
 }

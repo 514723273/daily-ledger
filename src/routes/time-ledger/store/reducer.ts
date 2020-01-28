@@ -1,11 +1,17 @@
 import moment from 'moment';
 import TimeLedgerActionType from './action-types';
-import { TimeLedgerStoreState, Action, SelectYearMonthAction } from '../types/store';
+import {
+  TimeLedgerStoreState,
+  Action,
+  SelectYearMonthAction,
+  SetMonthEventListAction
+} from '../types/store';
 
 const today: moment.Moment = moment();
 const defaultState: TimeLedgerStoreState = {
   today,
-  selectedDate: today
+  selectedDate: today,
+  monthEventList: []
 };
 
 export default (
@@ -17,6 +23,11 @@ export default (
       return {
         ...state,
         selectedDate: (action as SelectYearMonthAction).selectedDate
+      };
+    case TimeLedgerActionType.SET_MONTH_EVENT_LIST:
+      return {
+        ...state,
+        monthEventList: (action as SetMonthEventListAction).monthEventList
       };
     default:
       return state;
