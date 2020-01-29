@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const ITEM_WIDTH = 260;
-const ITEM_HEIGHT = 200;
 
 export const TableWrapper = styled.table`
   width: 100%;
@@ -29,7 +28,6 @@ export const TableBodyWrapper = styled.tbody`
     display: block;
     box-sizing: border-box;
     width: ${ITEM_WIDTH}px;
-    /* height: ${ITEM_HEIGHT}px; */
     border-left: #dadce0 1px solid;
     border-bottom: #dadce0 1px solid;
     padding: 0 4px;
