@@ -36,14 +36,10 @@ function* assembleMonthEventList(action: AssembleMonthEventListAction) {
   const result = yield axios.get(`/data/event-type-list.json`);
 
   const typeToColorMap: Map<string, string> = mapSubTypeToColor(result.data);
-
   for (let dateEventList of monthEventList) {
     for (let event of dateEventList) {
       const color = typeToColorMap.get(event.type);
-      if (color == null) {
-        throw Error(`“${event.type}”类型未被记录`);
-      }
-      event.color = color;
+      event.color = color || 'black';
     }
   }
   yield put(actionCreators.getSetMonthEventListAction(monthEventList));
