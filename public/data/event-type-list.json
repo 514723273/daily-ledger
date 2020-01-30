@@ -1,0 +1,131 @@
+[
+  {
+    "type": "睡觉",
+    "color": "gray",
+    "subTypeList": [
+      {
+        "type": "晚睡",
+        "color": "#212121"
+      },
+      {
+        "type": "午睡",
+        "color": "#424242"
+      }
+    ]
+  },
+
+  {
+    "type": "日常",
+    "color": "lime",
+    "subTypeList": [
+      {
+        "type": "奔波",
+        "color": "#827717"
+      },
+      {
+        "type": "整理",
+        "color": "#AFB42B"
+      },
+      {
+        "type": "洗漱",
+        "color": "#C0CA33"
+      },
+      {
+        "type": "吃饭",
+        "color": "#CDDC39"
+      },
+      {
+        "type": "休息",
+        "color": "#D4E157"
+      },
+      {
+        "type": "记录",
+        "color": "#DCE775"
+      }
+    ]
+  },
+
+  {
+    "type": "学习",
+    "color": "green",
+    "subTypeList": [
+      {
+        "type": "前端",
+        "color": "#1B5E20"
+      },
+      {
+        "type": "算法",
+        "color": "#43A047"
+      }
+    ]
+  },
+
+  {
+    "type": "修身养性",
+    "color": "purple",
+    "subTypeList": [
+      {
+        "type": "运动",
+        "color": "#4A148C"
+      },
+      {
+        "type": "英语",
+        "color": "#6A1B9A"
+      },
+      {
+        "type": "练字",
+        "color": "#7B1FA2"
+      },
+      {
+        "type": "游玩",
+        "color": "#8E24AA"
+      },
+      {
+        "type": "电影",
+        "color": "#9C27B0"
+      },
+      {
+        "type": "散步",
+        "color": "#AB47BC"
+      },
+      {
+        "type": "聚会",
+        "color": "#BA68C8"
+      }
+    ]
+  },
+
+  {
+    "type": "娱乐",
+    "color": "red",
+    "subTypeList": [
+      {
+        "type": "游戏",
+        "color": "#b71c1c"
+      },
+      {
+        "type": "网剧",
+        "color": "#c62828"
+      },
+      {
+        "type": "动漫",
+        "color": "#d32f2f"
+      }
+    ]
+  },
+
+  {
+    "type": "虚度光阴",
+    "color": "orange",
+    "subTypeList": [
+      {
+        "type": "刷手机",
+        "color": "#F57C00"
+      },
+      {
+        "type": "聊天",
+        "color": "#FB8C00"
+      }
+    ]
+  }
+]
