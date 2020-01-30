@@ -20,7 +20,7 @@
 
 ## 使用说明
 
-1. 克隆 [Daily Ledger Frontend 项目](https://github.com/KiyonamiYu/daily-ledger-frontend) 和 [Daily Ledger Tool 项目](https://github.com/KiyonamiYu/daily-ledger-tool)，放置在同一目录。（单独只是为了看看，只克隆本项目即可）
+1. 克隆 [Daily Ledger Frontend 项目](https://github.com/KiyonamiYu/daily-ledger-frontend) 和 [Daily Ledger Tool 项目](https://github.com/KiyonamiYu/daily-ledger-tool)，放置在同一目录。
 
 ```
 git clone https://github.com/KiyonamiYu/daily-ledger-frontend.git
@@ -34,8 +34,6 @@ cd daily-ledger-frontend
 yarn
 yarn start
 ```
-
-提示：测试数据只有**2020 年 1 月份**，查看日历时请注意日期切换。
 
 ## 更新日志
 
