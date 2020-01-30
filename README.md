@@ -16,11 +16,11 @@
 - 使用`react-create-app`脚手架初始化项目
 - `react`、`redux`、`react-router` 全家桶
 - 使用 `styled-components` 构建页面组件样式
-- 使用`redux-saga`统一异步和同步 action 操作流程
+- 使用`redux-saga`抽离异步操作流程
 
 ## 使用说明
 
-1. `clone`[Daily Ledger Frontend 项目](https://github.com/KiyonamiYu/daily-ledger-frontend)和[Daily Ledger Tool 项目](https://github.com/KiyonamiYu/daily-ledger-tool)，放置在同一目录。（单独只是为了看看，只`clone`本项目即可）
+1. 克隆 [Daily Ledger Frontend 项目](https://github.com/KiyonamiYu/daily-ledger-frontend) 和 [Daily Ledger Tool 项目](https://github.com/KiyonamiYu/daily-ledger-tool)，放置在同一目录。（单独只是为了看看，只克隆本项目即可）
 
 ```
 git clone https://github.com/KiyonamiYu/daily-ledger-frontend.git
@@ -48,7 +48,7 @@ yarn start
 #### Changed
 
 - 使用`TypeScript`完全重构项目
-- 创建[Daily Ledger Tool 项目](https://github.com/KiyonamiYu/daily-ledger-tool)，分离分析`today.txt`小工具
+- 创建 [Daily Ledger Tool 项目](https://github.com/KiyonamiYu/daily-ledger-tool)，分离分析`today.txt`小工具
 - 手动构建日历组件，高度定制化
 
 #### Removed
