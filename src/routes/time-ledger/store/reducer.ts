@@ -1,17 +1,25 @@
-import moment from 'moment';
-import TimeLedgerActionType from './action-types';
-import {
-  TimeLedgerStoreState,
-  Action,
-  SelectYearMonthAction,
-  SetMonthEventListAction
-} from '../types/store';
+// types
+import { Action, TimeLedgerStoreState } from '../types/store';
+import { Diary, Statistic } from '../types';
 
-const today: moment.Moment = moment();
+const typeList: Array<string> = ['晚睡', '午睡', '瞎折腾', '练字', '运动', '前端', '电影'];
+const diaryList: Array<Diary> = [];
+for (let i = 0; i < 10; i++) {
+  const statisticList: Array<Statistic> = [];
+  for (let type of typeList) {
+    statisticList.push({
+      type,
+      duration: Math.floor(Math.random() * 6)
+    });
+  }
+  diaryList.push({
+    date: `2020-01-${10 + Math.floor(Math.random() * 20)}`,
+    statisticList
+  });
+}
+
 const defaultState: TimeLedgerStoreState = {
-  today,
-  selectedDate: today,
-  monthEventList: []
+  diaryList
 };
 
 export default (
@@ -19,16 +27,6 @@ export default (
   action: Action
 ): TimeLedgerStoreState => {
   switch (action.type) {
-    case TimeLedgerActionType.SELECT_YEAR_MONTH:
-      return {
-        ...state,
-        selectedDate: (action as SelectYearMonthAction).selectedDate
-      };
-    case TimeLedgerActionType.SET_MONTH_EVENT_LIST:
-      return {
-        ...state,
-        monthEventList: (action as SetMonthEventListAction).monthEventList
-      };
     default:
       return state;
   }
